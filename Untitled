@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8">
+  <title>Кошик</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <h1>🛒 Ваш кошик</h1>
+  <div id="cart-items"></div>
+  <h3 id="total"></h3>
+  <button onclick="clearCart()">Очистити кошик</button>
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8">
+  <title>Мій магазин</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <h1>Інтернет-магазин</h1>
+  <div class="products">
+    <div class="product">
+      <h3>Шоколад ChocoFusion</h3>
+      <p>Ціна: 50 грн</p>
+      <button onclick="addToCart('Шоколад ChocoFusion', 50)">Додати в кошик</button>
+    </div>
+
+    <div class="product">
+      <h3>Шоколад з горіхами</h3>
+      <p>Ціна: 65 грн</p>
+      <button onclick="addToCart('Шоколад з горіхами', 65)">Додати в кошик</button>
+    </div>
+  </div>
+
+  <a href="cart.html">🛒 Перейти до кошика</a>
+
+  <script src="script.js"></script>
+</body>
+</html>
+
+  <script>
+    let cart = JSON.parse(localStorage.getItem('cart')) || [];
+    let cartItemsDiv = document.getElementById('cart-items');
+    let total = 0;
+
+    if (cart.length === 0) {
+      cartItemsDiv.innerHTML = "<p>Кошик порожній 😔</p>";
+    } else {
+      cart.forEach(item => {
+        cartItemsDiv.innerHTML += `<p>${item.name} — ${item.price} грн</p>`;
+        total += item.price;
+      });
+      document.getElementById('total').innerText = "Всього: " + total + " грн";
+    }
+
+    function clearCart() {
+      localStorage.removeItem('cart');
+      location.reload();
+    }
+  </script>
+</body>
+</html>
+
